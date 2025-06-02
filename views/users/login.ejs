@@ -1,33 +1,42 @@
 <% layout("/layouts/boilerplate") %>
 
-<br>
-<div class="row mb-3">
-    <h1 class="col-6 offset-3">Login</h1>
-    <div class="col-6 offset-3">
-        <br>
-        <form action="/login" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">
-                <label for="username" class="form-label"><h5>Username</h5></label>
-                <input 
-                    name="username" 
-                    id="username"
-                    type="text" 
-                    class="form-control"
-                    required
-                />
-            </div>
+<style>
+  .login-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 4rem;
+  }
+  .login-btn {
+    width: 100%;
+    background-color: #28a745;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+  }
+  .login-btn:hover {
+    background-color: #218838;
+  }
+</style>
 
-            <div class="mb-3">
-                <label for="password" class="form-label"><h5>Password</h5></label>
-                <input 
-                    name="password" 
-                    id="password"
-                    type="password" 
-                    class="form-control"
-                    required
-                />
-            </div>
-            <button type="submit" class="btn btn-success">Login</button>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="login-card">
+        <h2 class="text-center mb-4">Login</h2>
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input name="username" id="username" type="text" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" id="password" type="password" class="form-control" required />
+          </div>
+          <button type="submit" class="btn login-btn">Login</button>
         </form>
+      </div>
     </div>
+  </div>
 </div>
