@@ -1,150 +1,67 @@
-<% layout('/layouts/boilerplate') %>
+<% layout("/layouts/boilerplate") %>
 
 <style>
   body {
-    background-color: #f9f9f9;
-    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #f0f0f0; /* Light text for contrast */
   }
-
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .filter {
-    background: #ffffff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90px;
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-  }
-
-  .filter:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-  }
-
-  .filter i {
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .filter p {
-    font-size: 0.75rem;
-    margin: 0;
-  }
-
-  .tax-toggle {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    background: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .row {
-    margin-top: 2rem;
-  }
-
-  .listing-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
   .listing-card {
+    background: #1e1e1e;
     border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem; /* More padding */
+    transition: transform 0.3s ease;
   }
-
   .listing-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
   }
-
   .listing-card img {
+    border-radius: 0.5rem;
     width: 100%;
-    height: 200px;
     object-fit: cover;
   }
-
-  .card-body {
-    padding: 1rem;
-    background: #ffffff;
+  .listing-card .card-body {
+    margin-top: 1rem;
   }
-
-  .card-text {
-    font-size: 0.9rem;
-    color: #333333;
+  .listing-card h5 {
+    color: #ffffff;
   }
-
-  .tax-info {
-    display: none;
-    color: #888;
-    font-size: 0.75rem;
+  .listing-card p {
+    color: #cccccc;
   }
-
-  .tax-toggle label {
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
+  .total-after-taxes {
+    background: #333;
+    color: #28a745;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 768px) {
+    .listing-card {
+      padding: 1rem;
+    }
   }
 </style>
 
-<div id="filters">
-  <div class="filter"><i class="fa-solid fa-fire"></i><p>Trending</p></div>
-  <div class="filter"><i class="fa-solid fa-bed"></i><p>Rooms</p></div>
-  <div class="filter"><i class="fa-solid fa-tree-city"></i><p>Treehouse</p></div>
-  <div class="filter"><i class="fa-solid fa-mountain-city"></i><p>Mountain</p></div>
-  <div class="filter"><i class="fa-solid fa-caravan"></i><p>Campers</p></div>
-  <div class="filter"><i class="fa-solid fa-campground"></i><p>Camping</p></div>
-  <div class="filter"><i class="fa-solid fa-sailboat"></i><p>Boats</p></div>
-  <div class="filter"><i class="fa-solid fa-city"></i><p>City</p></div>
-  <div class="filter"><i class="fa-solid fa-cow"></i><p>Farm</p></div>
-  <div class="filter"><i class="fa-solid fa-chess-rook"></i><p>Castles</p></div>
-  <div class="tax-toggle">
-    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-    <label for="switchCheckDefault">Display total after taxes</label>
-  </div>
-</div>
-
-<div>
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-    <% for (let listing of allListings) { %>
-      <a href="/listings/<%= listing._id %>" class="listing-link">
-        <div class="card col listing-card">
-          <img src="<%= listing.image.url %>" alt="listing_image" />
+<div class="container mt-4">
+  <div class="row">
+    <% listings.forEach(listing => { %>
+      <div class="col-md-6 col-lg-4 col-12">
+        <div class="listing-card">
+          <img src="<%= listing.image %>" alt="<%= listing.title %>" />
           <div class="card-body">
-            <p class="card-text">
-              <b><%= listing.title %></b><br/>
-              <%= listing.price %> CZ / night<br/>
-              <i class="tax-info">18% GST</i>
-            </p>
+            <h5><%= listing.title %></h5>
+            <p><%= listing.description.substring(0, 100) %>...</p>
+            <div class="total-after-taxes">
+              Total after taxes: $<%= listing.totalAfterTaxes %>
+            </div>
+            <a href="/listings/<%= listing._id %>" class="btn btn-success mt-2">View Listing</a>
           </div>
         </div>
-      </a>
-    <% } %>
+      </div>
+    <% }) %>
   </div>
 </div>
-
-<script>
-  let taxSwitch = document.getElementById("switchCheckDefault");
-  taxSwitch.addEventListener("click", () => {
-    let taxInfo = document.getElementsByClassName("tax-info");
-    for (let info of taxInfo) {
-      info.style.display = taxSwitch.checked ? "inline" : "none";
-    }
-  });
-</script>
