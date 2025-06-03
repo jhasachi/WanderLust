@@ -1,5 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 
+<<<<<<< HEAD
 <div class="row mb-3 mt-3">
     <div class="col-8 offset-2">
     <br/>
@@ -81,8 +82,63 @@
         </div>
         <button class="btn btn-dark add-btn mt-3 mb-3">Create</button>
     </form>
+=======
+<style>
+  .new-form-container {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+  }
+  .new-form-container h2 {
+    margin-bottom: 1rem;
+  }
+  .new-form-container .form-control:focus {
+    box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+  }
+  .add-btn {
+    width: 100%;
+    background-color: #28a745;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+  }
+  .add-btn:hover {
+    background-color: #218838;
+  }
+</style>
+
+<div class="container new-form-container">
+  <h2>Create a New Listing</h2>
+  <form method="POST" action="/listings" novalidate enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input name="listing[title]" placeholder="Add Title.." type="text" class="form-control" required />
+>>>>>>> e4b7dab9524e5b2c72063354b8293f0a13e37e3a
     </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="listing[description]" class="form-control" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Upload Image</label>
+      <input name="listing[image]" type="file" class="form-control" />
+    </div>
+    <div class="row">
+      <div class="mb-3 col-md-4">
+        <label for="price" class="form-label">Price</label>
+        <input name="listing[price]" placeholder="450" class="form-control" required />
+      </div>
+      <div class="mb-3 col-md-8">
+        <label for="location" class="form-label">Location</label>
+        <input name="listing[location]" placeholder="Prague" type="text" class="form-control" required />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <input name="listing[country]" placeholder="Czech Republic" type="text" class="form-control" required />
+    </div>
+    <button class="btn add-btn mt-3 mb-3">Create</button>
+  </form>
 </div>
-
-
-
